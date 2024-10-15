@@ -1,0 +1,24 @@
+<div class="h-screen flex items-center justify-center text-slate-900">
+  @if(!showConfirmationModal){
+    <div class="bg-white p-7 flex flex-col items-center justify-center rounded-lg shadow-xl max-w-[310px] md:max-w-[500px] text-center gap-5">
+      <h3 class="text-2xl">Hola, {{eventInfo.title.split("-")[0].split(" ")[0].trim() }}! </h3>
+      <h4 class="font-bold ">¿De verdad quieres cancelar tu reserva?</h4>
+      <h4 class="text-7xl"> 😯 </h4>
+      <p class="text-sm mt-3">Esta acción es irreversible y cancelará la cita que habías programado.</p>
+      <div class="flex gap-5 ">
+        <button (click)="close()" class="border-2 border-slate-900 duration-200 text-slate-900 py-2 px-4 rounded mt-2">No, volver</button>
+        <button (click)="deleteEvent()" class="bg-red-500 hover:bg-red-400 duration-200 text-white py-2 px-4 rounded mt-2">Sí, cancelar</button>
+      </div>
+    </div>
+  } @else {
+
+    <div class="bg-white p-7 text-center rounded-lg shadow-xl max-w-[310px] md:max-w-[500px]">
+      <h2 class="text-xl font-bold"> Tu reserva ha sido cancelada </h2>
+      <div class="flex gap-5 mt-5">
+        <button (click)="close()" class="border-2 border-slate-900 duration-200 text-slate-900 py-2 px-4 rounded mt-2">Salir</button>
+        <button (click)="navigateToBooking()" class="bg-slate-900 hover:bg-slate-800 duration-200 text-white py-2 px-4 rounded mt-2">Hacer una nueva reserva</button>
+      </div>
+    </div>
+  }
+
+</div>

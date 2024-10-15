@@ -1,0 +1,196 @@
+<div>
+
+  <!-- GENERAL INFO -->
+  <form class="flex flex-col" (submit)="handleInfoSubmit()">
+
+    <h3 class="text-lg font-bold text-center my-5">Información General</h3>
+    <!-- activate/disactiva edition btn -->
+    <input type="checkbox" id="lock" (click)="toggleEdition()"/>
+    <label for="lock" class="lock-label self-end">
+      <span class="lock-wrapper">
+        <span class="shackle"></span>
+        <svg
+          class="lock-body"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 5C0 2.23858 2.23858 0 5 0H23C25.7614 0 28 2.23858 28 5V23C28 25.7614 25.7614 28 23 28H5C2.23858 28 0 25.7614 0 23V5ZM16 13.2361C16.6137 12.6868 17 11.8885 17 11C17 9.34315 15.6569 8 14 8C12.3431 8 11 9.34315 11 11C11 11.8885 11.3863 12.6868 12 13.2361V18C12 19.1046 12.8954 20 14 20C15.1046 20 16 19.1046 16 18V13.2361Z"
+            fill="white"
+          ></path>
+        </svg>
+      </span>
+    </label>
+
+
+    <!-- inputs -->
+    <div class="flex flex-col">
+      <label for="businessName" class="font-semibold">Nombre del negocio <span class="text-red-500">*</span></label>
+      <input type="text" id="businessName" name="businessName" [(ngModel)]="businessInfo.businessName" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+    </div>
+
+    <div class="flex flex-col">
+      <label for="address" class="font-semibold">Dirección <span class="text-red-500">*</span></label>
+      <input type="text" id="address" name="address" [(ngModel)]="businessInfo.address" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+    </div>
+    
+    <div class="flex flex-col">
+      <label for="phone" class="font-semibold">Número de contacto <span class="text-red-500">*</span></label>
+      <input type="text" id="phone" name="phone" [(ngModel)]="businessInfo.phone" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+    </div>
+    
+
+    <div class="flex flex-col">
+      <label for="email" class="font-semibold">Correo electrónico <span class="text-red-500">*</span></label>
+      <input type="text" id="email" name="email" [(ngModel)]="businessInfo.email" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+    </div>
+
+    
+    <div class="flex flex-col">
+      <label for="sessionTime" class="font-semibold">¿Cuánto dura la atención con cada cliente?</label>
+      <select class="border" id="sessionTime" name="sessionTime" [(ngModel)]="businessInfo.sessionTime" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+        <option value="" disabled selected>Escoja una opción</option>
+        <option value="10">10 mins</option>
+        <option value="15">15 mins</option>
+        <option value="20">20 mins</option>
+        <option value="30">30 mins</option>
+        <option value="60">60 mins</option>
+      </select>
+    </div>
+    
+    <div class="flex flex-col">
+      <label for="aboutUs" class="font-semibold">Descripción del negocio <span class="text-red-500">*</span></label>
+      <textarea type="text" id="aboutUs" name="aboutUs" [(ngModel)]="businessInfo.aboutUs" class="border p-1 resize-none" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}"></textarea>
+    </div>
+
+    <!-- redes sociales -->
+    <h3 class="text-lg font-semibold mt-5">Redes Sociales</h3>
+    <div class="grid md:grid-cols-2 gap-x-10">
+      <div class="flex flex-col">
+        <label for="instagram" class="font-semibold">Instagram</label>
+        <input type="text" id="instagram" name="instagram" [(ngModel)]="businessInfo.instagram" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+      </div>
+  
+      <div class="flex flex-col">
+        <label for="facebook" class="font-semibold">Facebook</label>
+        <input type="text" id="facebook" name="facebook" [(ngModel)]="businessInfo.facebook" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+      </div>
+  
+      <div class="flex flex-col">
+        <label for="tiktok" class="font-semibold">Tiktok</label>
+        <input type="text" id="tiktok" name="tiktok" [(ngModel)]="businessInfo.tiktok" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+      </div>
+  
+      <div class="flex flex-col">
+        <label for="youtube" class="font-semibold">Youtube</label>
+        <input type="text" id="youtube" name="youtube" [(ngModel)]="businessInfo.youtube" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+      </div>
+  
+      <div class="flex flex-col">
+        <label for="linkedIn" class="font-semibold">LinkedIn</label>
+        <input type="text" id="linkedIn" name="linkedIn" [(ngModel)]="businessInfo.linkedIn" class="border p-1" placeholder="juan@gmail.com" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'border-none bg-transparent': !activateEditionGeneralInfo}">
+      </div>
+    </div>
+
+
+    
+
+    <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white p-2 rounded mt-2" [disabled]="!activateEditionGeneralInfo" [ngClass]="{'opacity-50': !activateEditionGeneralInfo}" > Actualizar</button>
+
+    <!-- Confirmation Modal-->
+    @if(showModal){
+      <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-70 flex items-center justify-center">
+        <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg overflow-x-hidden" >
+          <!-- close btn -->
+           <div (click)="onModalClose()">
+             <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 cursor-pointer">
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#1C274C"/>
+             </svg>
+           </div>
+
+          <!-- title -->
+          <h3 class="text-3xl text-center"> ✅ </h3>
+          <h3 class="font-bold text-lg py-5 text-center">¡Información Actualizada! </h3>
+        </form>
+      </div>
+    }
+
+  </form>
+
+
+  
+    <!---------------------------- update picture----------------- -->
+  <form class="flex flex-col" (submit)="handleInfoSubmit()">
+    <h3 class="text-lg font-bold text-center pt-10 border-t">Logo</h3>
+
+    <!-- activate/disactiva edition btn -->
+    <input type="checkbox" id="lock2" (click)="toggleEdition2()"/>
+    <label for="lock2" class="lock-label2 self-end">
+      <span class="lock-wrapper2">
+        <span class="shackle2"></span>
+        <svg
+          class="lock-body2"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 5C0 2.23858 2.23858 0 5 0H23C25.7614 0 28 2.23858 28 5V23C28 25.7614 25.7614 28 23 28H5C2.23858 28 0 25.7614 0 23V5ZM16 13.2361C16.6137 12.6868 17 11.8885 17 11C17 9.34315 15.6569 8 14 8C12.3431 8 11 9.34315 11 11C11 11.8885 11.3863 12.6868 12 13.2361V18C12 19.1046 12.8954 20 14 20C15.1046 20 16 19.1046 16 18V13.2361Z"
+            fill="white"
+          ></path>
+        </svg>
+      </span>
+    </label>
+
+    <div class="flex flex-col md:flex-row items-center gap-5 justify-center">
+      @if(imagePreview){
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="size-40 rounded-full object-cover"> 
+      } @else {
+
+        <img src="../../../assets/uploadpic.jpg" alt="Logo de empresa" class="size-40 rounded-full object-cover">
+      }
+  
+      <div class="flex flex-col">
+        <label for="banner" class="font-semibold">Imagen <span class="text-red-500">*</span></label>
+        <input type="file" accept="image/*" id="banner" (change)="onFileChange($event)" [disabled]="!activateEditionPicture" class="w-[155px]"/>
+      </div>
+    </div>
+
+
+    
+
+    <!-- Error Message -->
+    @if(errorMsg !== "OK"){
+      <h4 class="text-sm text-red-500 mt-5"> {{ errorMsg }} </h4>
+    }
+
+    <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white p-2 rounded mt-2" [disabled]="!activateEditionPicture" [ngClass]="{'opacity-50': !activateEditionPicture}">Actualizar</button>
+
+     <!-- Confirmation Modal-->
+     @if(showModal2){
+      <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-70 flex items-center justify-center">
+        <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg overflow-x-hidden" >
+          <!-- close btn -->
+           <div (click)="onModalClose2()">
+             <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 cursor-pointer">
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#1C274C"/>
+             </svg>
+           </div>
+
+          <!-- title -->
+          <h3 class="text-3xl text-center"> ✅ </h3>
+          <h3 class="font-bold text-lg py-5 text-center">¡Foto Actualizada! </h3>
+        </form>
+      </div>
+    }
+  </form>
+
+  
+  <app-editschedule></app-editschedule>
+
+</div>

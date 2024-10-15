@@ -1,0 +1,109 @@
+<form class="py-10 flex flex-col gap-2 text-slate-900">
+  <!-- form title -->
+  <h2 class="text-lg font-bold text-center my-5">Horario de Atención</h2>
+  
+  <!-- opening hours -->
+  <div>
+    <div>
+      @for(day of openingHoursArr; track day){
+        <p class="text-sm text-slate-900"><span class="font-bold">{{ day.split(":")[0] }}: </span> {{ day.split(":")[1] }} </p>
+      }
+    </div>
+  </div>
+  
+  <!-- activate/disactiva edition btn -->
+  <input type="checkbox" id="lock3" (click)="toggleEdition3()"/>
+  <label for="lock3" class="lock-label3 self-end">
+    <span class="lock-wrapper3">
+      <span class="shackle3"></span>
+      <svg
+        class="lock-body3"
+        viewBox="0 0 28 28"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0 5C0 2.23858 2.23858 0 5 0H23C25.7614 0 28 2.23858 28 5V23C28 25.7614 25.7614 28 23 28H5C2.23858 28 0 25.7614 0 23V5ZM16 13.2361C16.6137 12.6868 17 11.8885 17 11C17 9.34315 15.6569 8 14 8C12.3431 8 11 9.34315 11 11C11 11.8885 11.3863 12.6868 12 13.2361V18C12 19.1046 12.8954 20 14 20C15.1046 20 16 19.1046 16 18V13.2361Z"
+          fill="white"
+        ></path>
+      </svg>
+    </span>
+  </label>
+
+ 
+  <!-- day of the week -->
+  <h3 class="text-xl font-bold text-center uppercase mt-10"> {{ currentDay }} </h3>
+
+  <!-- open and close time -->
+  <div class="flex flex-col">
+    <label for="openTime" class="font-semibold">Hora de Apertura</label>
+    <select class="border p-1" id="openTime" [(ngModel)]="dayObject.openTime" name="dayObject.openTime" [disabled]="!activateEdition3" [ngClass]="{'border-none bg-transparent': !activateEdition3}">
+      <option value="" disabled selected>Escoja una hora</option>
+      <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+    </select>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="closeTime" class="font-semibold ">Hora de Cierre</label>
+    <select class="border p-1" id="closeTime" [(ngModel)]="dayObject.closeTime" name="dayObject.closeTime" [disabled]="!activateEdition3" [ngClass]="{'border-none bg-transparent': !activateEdition3}">
+      <option value="" disabled selected>Escoja una hora</option>
+      <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+    </select>
+  </div>
+
+  <!-- checkbox -->
+  <div class="flex gap-3">
+    <label for="descanso" class="font-semibold">Incluir descanso</label>
+    <input class="border p-1" type="checkbox" id="descanso" [(ngModel)]="areBreaksActive" name="areBreaksActive" [disabled]="!activateEdition3" [ngClass]="{'border-none bg-transparent': !activateEdition3}">
+  </div>
+
+  <!-- break inputs -->
+   @if(areBreaksActive){
+     <div>
+       <div class="flex flex-col">
+         <label for="breakStart" class="font-semibold">Inicio descanso</label>
+         <select class="border p-1" id="breakStart" [(ngModel)]="dayObject.breakStart" name="dayObject.breakStart" [disabled]="!activateEdition3" [ngClass]="{'border-none bg-transparent': !activateEdition3}">
+           <option value="" disabled selected>Escoja una hora</option>
+           <option *ngFor="let slot of timeSlots" [value]="slot.value">{{ slot.display }}</option>
+         </select>
+       </div>
+     
+       <div class="flex flex-col">
+         <label for="breakFinish" class="font-semibold">Fin del descanso</label>
+         <select class="border p-1" id="breakFinish" [(ngModel)]="dayObject.breakFinish" name="dayObject.breakFinish" [disabled]="!activateEdition3" [ngClass]="{'border-none bg-transparent': !activateEdition3}">
+           <option value="" disabled selected>Escoja una hora</option>
+           <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+         </select>
+       </div>
+     </div>
+   }
+
+  <!-- Error Message -->
+   @if(errorMsg !== "OK"){
+     <h4 class="text-sm text-red-500"> {{ errorMsg }} </h4>
+   }
+
+  <!-- Btns -->
+  <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white py-2 rounded mt-2" type="button" (click)="handleNext()" [disabled]="!activateEdition3" [ngClass]="{'opacity-50': !activateEdition3}"> Siguiente </button>
+  <button class="border border-slate-900 duration-200 text-slate-900 py-2 rounded" type="button" (click)="handleSkip()" [disabled]="!activateEdition3" [ngClass]="{'opacity-50': !activateEdition3}"> Saltar este día. </button>
+
+  <!-- Confirmation Modal-->
+  @if(showModal3){
+    <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-70 flex items-center justify-center">
+      <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg overflow-x-hidden" >
+        <!-- close btn -->
+         <div (click)="onModalClose()">
+           <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 cursor-pointer">
+             <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#1C274C"/>
+           </svg>
+         </div>
+
+        <!-- title -->
+        <h3 class="text-3xl text-center"> ✅ </h3>
+        <h3 class="font-bold text-lg py-5 text-center">¡Horario Actualizado! </h3>
+      </form>
+    </div>
+  }
+</form>

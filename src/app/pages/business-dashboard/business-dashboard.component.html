@@ -1,0 +1,34 @@
+<!-- Banner -->
+<div class="max-w-[800px] mx-auto relative">
+  <app-gallery />
+
+  <!-- Edit gallery btn  -->
+  <a [routerLink]="'/gallery/'+ businessId">
+    <img src="assets/uploadpic.jpg" alt="Cargar imagen" class="absolute top-4 right-4 size-12 rounded-full" title="Editar galería.">
+  </a>
+</div>
+  
+
+<div class="flex flex-col p-5 max-w-[800px] mx-auto ">
+
+  <div class="flex items-center gap-3">
+    <img [src]="backendURL + businessInfo.banner" alt="Logo" class="size-12">
+    <div class="flex flex-col mt-5 text-slate-900">
+      <h2 class="text-4xl font-bold "> {{ businessInfo.businessName }} </h2>
+      <h4 class="text-lg text-slate-700"> {{ businessInfo.address }} </h4>
+    </div>
+  </div>
+
+  <!-- Navigation menu -->
+  <div class="flex justify-around my-5">
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[0]}" (click)="toggleActiveLink(0)">Reservas</button>
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[1]}" (click)="toggleActiveLink(1)">Reseñas</button>
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[2]}" (click)="toggleActiveLink(2)">Perfil</button>
+  </div>
+
+  <app-fullcalendar [ngClass]="{'hidden': !activeLinkOnMenu[0]}"></app-fullcalendar>
+
+  <app-reviews [ngClass]="{'hidden': !activeLinkOnMenu[1]}"></app-reviews>
+
+  <app-edit-business-info [ngClass]="{'hidden': !activeLinkOnMenu[2]}" (notifyParent)="getBusinessInfo()"></app-edit-business-info>
+</div>

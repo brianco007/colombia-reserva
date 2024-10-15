@@ -1,0 +1,153 @@
+<div class="flex flex-col items-center justify-center  p-5 ">
+
+  
+  <!-- GENERAL INFO -->
+  <form class="p-10 flex flex-col sm:w-[600px] w-full gap-2 text-slate-900 shadow-xl rounded-xl bg-white" [ngClass]="{'hidden': showScheduleForm}">
+      <!-- form title -->
+      <div class="flex flex-col items-center mb-5">
+        <img src="../../../assets/store.svg" alt="Store icon" width="70">
+        <h2 class="text-2xl lg:text-3xl font-bold">Información General</h2>
+      </div>
+
+      <!-- Nombre de negocio, dirección, celular, correo -->
+      <div class="flex flex-col">
+        <label for="businessName" class="font-semibold">Nombre de su negocio <span class="text-red-500">*</span></label>
+        <input type="text" id="businessName" [(ngModel)]="dataTobeSent.businessName" class="border p-1" placeholder="Barber Shop" name="businessName">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="address" class="font-semibold">Dirección <span class="text-red-500">*</span></label>
+        <input type="text" id="address" [(ngModel)]="dataTobeSent.address" class="border p-1" placeholder="Corazón de Jesús Mz6 - C7" name="address">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="phone" class="font-semibold">Celular <span class="text-red-500">*</span></label>
+        <input type="text" id="phone" [(ngModel)]="dataTobeSent.phone" class="border p-1" placeholder="3099833546" name="phone">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="email" class="font-semibold">Correo electrónico <span class="text-red-500">*</span></label>
+        <input type="text" id="email" [(ngModel)]="dataTobeSent.email" class="border p-1" placeholder="minegocio@gmail.com" name="email">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="aboutUs" class="font-semibold">Breve descripción de su negocio <span class="text-red-500">*</span></label>
+        <textarea name="aboutUs" id="aboutUs" [(ngModel)]="dataTobeSent.aboutUs" rows="3" class="border resize-none p-1" placeholder="Escriba un resumen de lo que ofrece su negocio."></textarea>
+      </div>
+
+
+      <!-- social networks -->
+      <div class="flex flex-col">
+        <h3 class="font-semibold text-lg">Redes Sociales</h3>
+
+        <div class="grid sm:grid-cols-2 gap-x-5">
+          <!-- Instagram -->
+          <div class="flex flex-col">
+            <label for="instagram" class="font-semibold">Instagram </label>
+            <input type="text" id="instagram" [(ngModel)]="dataTobeSent.instagram" class="border p-1" placeholder="@minegocio1245" name="instagram">
+          </div>
+  
+          <!-- Facebook -->
+          <div class="flex flex-col">
+            <label for="facebook" class="font-semibold">Facebook </label>
+            <input type="text" id="facebook" [(ngModel)]="dataTobeSent.facebook" class="border p-1" placeholder="@minegocio1245" name="facebook">
+          </div>
+  
+          <!-- tiktok -->
+          <div class="flex flex-col">
+            <label for="tiktok" class="font-semibold">TikTok </label>
+            <input type="text" id="tiktok" [(ngModel)]="dataTobeSent.tiktok" class="border p-1" placeholder="@minegocio1245" name="tiktok">
+          </div>
+  
+          <!-- youtube -->
+          <div class="flex flex-col">
+            <label for="youtube" class="font-semibold">YouTube </label>
+            <input type="text" id="youtube" [(ngModel)]="dataTobeSent.youtube" class="border p-1" placeholder="@minegocio1245" name="youtube">
+          </div>
+  
+          <!-- linkedIn -->
+          <div class="flex flex-col">
+            <label for="linkedIn" class="font-semibold">LinkedIn </label>
+            <input type="text" id="linkedIn" [(ngModel)]="dataTobeSent.linkedIn" class="border p-1" placeholder="@minegocio1245" name="linkedIn">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Error Message -->
+      @if(errorMsg !== "OK"){
+        <h4 class="text-sm text-red-500"> {{ errorMsg }} </h4>
+      }
+
+      <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white py-2 rounded mt-2" (click)="toggleVisibility()">Siguiente</button>
+    </form>
+
+  <!-- SCHEDULE -->
+  @if(showScheduleForm){
+    <form class="p-10 flex flex-col sm:w-[600px] w-full gap-2 text-slate-900 shadow-xl rounded-xl bg-white">
+      <!-- form title -->
+      <div class="flex flex-col items-center">
+        <img src="../../../assets/clock.svg" alt="Store icon" width="70">
+        <h2 class="text-2xl lg:text-3xl font-bold">Horario de Atención</h2>
+      </div>
+
+      <!-- day of the week -->
+      <h3 class="text-xl font-bold text-center uppercase mt-10"> {{ currentDay }} </h3>
+    
+      <!-- open and close time -->
+      <div class="flex flex-col">
+        <label for="openTime" class="font-semibold">Hora de Apertura</label>
+        <select class="border" id="openTime" [(ngModel)]="dayObject.openTime" name="dayObject.openTime">
+          <option value="" disabled selected>Escoja una hora</option>
+          <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+        </select>
+      </div>
+    
+      <div class="flex flex-col">
+        <label for="closeTime" class="font-semibold">Hora de Cierre</label>
+        <select class="border" id="closeTime" [(ngModel)]="dayObject.closeTime" name="dayObject.closeTime">
+          <option value="" disabled selected>Escoja una hora</option>
+          <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+        </select>
+      </div>
+    
+      <!-- checkbox -->
+      <div class="flex gap-3">
+        <label for="descanso" class="font-semibold">Incluir descanso</label>
+        <input type="checkbox" id="descanso" [(ngModel)]="areBreaksActive" name="areBreaksActive">
+      </div>
+    
+      <!-- break inputs -->
+       @if(areBreaksActive){
+         <div>
+           <div class="flex flex-col">
+             <label for="breakStart" class="font-semibold">Inicio descanso</label>
+             <select class="border" id="breakStart" [(ngModel)]="dayObject.breakStart" name="dayObject.breakStart">
+               <option value="" disabled selected>Escoja una hora</option>
+               <option *ngFor="let slot of timeSlots" [value]="slot.value">{{ slot.display }}</option>
+             </select>
+           </div>
+         
+           <div class="flex flex-col">
+             <label for="breakFinish" class="font-semibold">Fin del descanso</label>
+             <select class="border" id="breakFinish" [(ngModel)]="dayObject.breakFinish" name="dayObject.breakFinish">
+               <option value="" disabled selected>Escoja una hora</option>
+               <option *ngFor="let slot of timeSlots" [value]="slot.value" >{{ slot.display }}</option>
+             </select>
+           </div>
+         </div>
+       }
+  
+      <!-- Error Message -->
+       @if(errorMsg !== "OK"){
+         <h4 class="text-sm text-red-500"> {{ errorMsg }} </h4>
+       }
+    
+      <!-- Btns -->
+      <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white py-2 rounded mt-2" type="button" (click)="handleNext()"> Guardar y continuar </button>
+      <button class="border border-slate-900 duration-200 text-slate-900 py-2 rounded" type="button" (click)="handleSkip()"> Saltar este día. </button>
+    </form>
+  }
+
+
+</div>

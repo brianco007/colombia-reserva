@@ -1,0 +1,48 @@
+/* From Uiverse.io by vinodjangid07 */ 
+#lock3 {
+  display: none;
+}
+.lock-label3 {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(80, 80, 80);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.lock-wrapper3 {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-10deg);
+}
+.shackle3 {
+  background-color: transparent;
+  height: 9px;
+  width: 14px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top: 3px solid white;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+  transition: all 0.3s;
+}
+.lock-body3 {
+  width: 15px;
+}
+#lock3:checked + .lock-label3 .lock-wrapper3 .shackle3 {
+  transform: rotateY(150deg) translateX(3px);
+  transform-origin: right;
+}
+#lock3:checked + .lock-label3 {
+  background-color: rgb(80, 80, 80);
+}
+.lock-label3:active {
+  transform: scale(0.9);
+}

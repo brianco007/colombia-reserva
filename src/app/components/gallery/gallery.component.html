@@ -1,0 +1,16 @@
+<div class="w-full relative newmd:max-w-[800px] mx-auto newmd:mt-10" >
+  <img [src]="currentPicture" alt="gallery" class="object-cover h-60 sm:h-80 md:h-96 lg:h-[400px] w-full ">
+
+  <!-- dots -->
+  <div class="absolute bottom-3 left-[50%] translate-x-[-50%] gap-5 lg:gap-10 flex">
+    @for(picture of pictures; track $index){
+      <span class="relative flex h-3 w-3 cursor-pointer"  (click)="handleDotClick($index) ">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" [ngClass]="{'animate-ping': currentIndex === $index}"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-slate-900" [ngClass]="{'bg-white': currentIndex === $index}"></span>
+      </span>
+    }
+  </div>
+</div>
+  
+
+

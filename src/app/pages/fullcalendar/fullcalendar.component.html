@@ -1,0 +1,46 @@
+<div class="flex items-center justify-center">
+
+  <main class="w-full relative">
+    <app-loader *ngIf="loading"></app-loader>
+    <full-calendar [options]="calendarOptions" *ngIf="!loading"></full-calendar>
+  </main>
+
+  <!-- Confirmation Modal-->
+  @if(openEventDetailsModal){
+    <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-90 flex items-center justify-center z-10"  >
+      <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg text-center">
+        <!-- close btn -->
+         <div (click)="openEventDetailsModal = false">
+           <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 cursor-pointer">
+             <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#1C274C"/>
+           </svg>
+         </div>
+
+        <!-- title -->
+        <h3 class="font-bold text-lg py-5 border-b">Detalles del cliente </h3>
+
+        <!-- info -->
+        <div class="py-3 flex flex-col border-b">
+          <h3 class="text-lg font-semibold"> {{ eventTitle }}  </h3>
+          <h3 class="text-lg font-semibold"> {{ customerEmail }}  </h3>
+        </div>
+
+        <!-- action btns -->
+        <div class="flex flex-col mt-5 gap-3">
+        
+          <a class="flex items-center justify-center border p-2 rounded-md bg-slate-900 text-white hover:bg-slate-700" [href]="'https://wa.me/57'+ customerWhatsapp  +'?text=¡Hola ' + customerName  + '! Te escribimos de ' + businessName + '. ¿Cómo estás?' " target="_blank">
+            <img src="../../../assets/whatsapp.svg" alt="WhatsApp icon" width="30">
+            <h5 class="text-xs font-semibold">Escribir al WhatsApp</h5>
+          </a>
+  
+          <div class="flex items-center justify-center cursor-pointer border p-2 rounded-md bg-slate-900 text-white hover:bg-slate-700" (click)="deleteEvent(eventId)">
+            <img src="../../../assets/delete.svg" alt="Delete" width="30">
+            <h5 class="text-xs font-semibold">Eliminar esta reserva</h5>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  }
+</div>

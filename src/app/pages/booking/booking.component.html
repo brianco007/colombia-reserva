@@ -1,0 +1,165 @@
+<!-- Gallery -->
+<app-gallery />
+
+<div class="flex flex-col p-5 max-w-[800px] mx-auto relative">
+  
+  <!-- Business Name-Address & Social Media Links -->
+  <div class="flex flex-col lg:flex-row lg:justify-between">
+
+    <div class="flex items-center gap-3 ">
+      <img [src]="backendURL + dataToBeSent.banner" alt="Logo" class="size-12">
+      <div class="flex flex-col  text-slate-900">
+        <h2 class="text-2xl md:text-4xl font-bold "> {{ dataToBeSent.businessName }} </h2>
+        <h4 class="text-sm md:text-base text-slate-700"> {{ dataToBeSent.address }} </h4>
+      </div>
+    </div>
+
+    <!-- social media -->
+    <div class="flex justify-center items-center self-end">
+      @if(dataToBeSent.instagram){
+        <a (click)="openSocialMedia($event, dataToBeSent.instagram.slice(1))" class="cursor-pointer">
+          <img src="assets/instagram.svg" alt="Instagram logo"  class="w-[31px] lg:w-[39px]">
+        </a>
+      }
+
+      @if(dataToBeSent.facebook){
+        <a (click)="openSocialMedia($event, dataToBeSent.facebook.slice(1))" class="cursor-pointer">
+          <img src="assets/facebook.svg" alt="facebook logo" class="w-[38px] lg:w-[47px]">
+        </a>
+      }
+
+      @if(dataToBeSent.tiktok){
+        <a (click)="openSocialMedia($event, dataToBeSent.tiktok)" class="cursor-pointer">
+          <img src="assets/tiktok.svg" alt="tiktok logo" class="w-[28px] lg:w-[36px]">
+        </a>
+      }
+
+      @if(dataToBeSent.youtube){
+        <a (click)="openSocialMedia($event, dataToBeSent.youtube)" class="cursor-pointer">
+          <img src="assets/youtube.svg" alt="youtube logo" class="w-[38px] lg:w-[47px]">
+        </a>
+      }
+
+      @if(dataToBeSent.linkedIn){
+        <a (click)="openSocialMedia($event, dataToBeSent.linkedIn.slice(1))" class="cursor-pointer">
+          <img src="assets/linkedin.svg" alt="linkedIn logo" class="w-[31px] lg:w-[39px]">
+        </a>
+      }
+    </div>
+  </div>
+
+  <!-- Navigation menu -->
+  <div class="flex justify-around my-5">
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[0]}" (click)="toggleActiveLink(0)">Reservar</button>
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[1]}" (click)="toggleActiveLink(1)">Reseñas</button>
+    <button class="px-5 md:px-10 py-1 rounded-t-xl" [ngClass]="{'font-bold shadow-xl bg-slate-900 text-white px-10': activeLinkOnMenu[2]}" (click)="toggleActiveLink(2)">Detalles</button>
+  </div>
+  
+  <!-- BOOKING SECTION -->
+  <form class="p-10 flex flex-col  w-full gap-2 text-slate-900 bg-white rounded-lg" (submit)="handleSubmmit()" [ngClass]="{'hidden': !activeLinkOnMenu[0]}"> 
+    <!-- open and close time -->
+    <div class="flex flex-col">
+      <label for="name" class="font-semibold">Nombre y Apellido <span class="text-red-500">*</span></label>
+      <input type="text" id="name" name="name" [(ngModel)]="formData.name" class="border p-1" placeholder="Juan Pérez">
+    </div>
+  
+    <div class="flex flex-col">
+      <label for="phone" class="font-semibold">Celular <span class="text-red-500">*</span></label>
+      <input type="text" id="phone" name="phone" [(ngModel)]="formData.phone" class="border p-1" placeholder="315099833">
+    </div>
+
+    <div class="flex flex-col">
+      <label for="email" class="font-semibold">Correo electrónico <span class="text-red-500">*</span></label>
+      <input type="email" id="email" name="email" [(ngModel)]="formData.email" class="border p-1" placeholder="juan@gmail.com">
+    </div>
+
+    <div class="flex flex-col">
+      <label for="date" class="font-semibold">Fecha <span class="text-red-500">*</span></label>
+      <input type="date" id="date" name="date" [(ngModel)]="formData.date" class="border p-1" (change)="handleChange()">
+    </div>
+
+    <div class="flex flex-col">
+      <label for="time" class="font-semibold">Hora <span class="text-red-500">*</span></label>
+      <select class="border p-1" id="time" [(ngModel)]="formData.time" name="formData.time">
+        <option value="" disabled selected>Escoja una hora</option>
+        <option *ngFor="let slot of selectedDaySlots" [value]="slot.value" >{{ slot.display }}</option>
+      </select>
+    </div>
+
+    <!-- Error Message -->
+    @if(errorMsg !== "OK"){
+      <h4 class="text-sm text-red-500"> {{ errorMsg }} </h4>
+    }
+  
+    
+    <!-- Btns -->
+    <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white py-2 rounded mt-2" > Reservar </button>
+
+    <!-- Confirmation Modal-->
+    @if(confirmationModal){
+      <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-70 flex items-center justify-center"  (click)="onModalContainerClick()">
+        <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg overflow-x-hidden" (click)="onFormClick($event)" [ngClass]="{'animate-wiggle': addShakingEffects}">
+          <!-- close btn -->
+           <div (click)="confirmationModal = false">
+             <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-3 right-3 cursor-pointer">
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#1C274C"/>
+             </svg>
+           </div>
+
+          <!-- title -->
+          <h3 class="font-bold text-lg py-5 border-b">¡Reserva Creada! ✅</h3>
+
+          <h3 class="text-sm py-3"> Los datos de tu reserva fueron enviados a: <span class="font-semibold">{{ clientEmail }}</span>  </h3>
+
+          <p class="text-xs pt-3 font-bold">No olvides revisar tu carpeta de spam</p>
+        </form>
+      </div>
+    }
+  </form>
+
+  <!-- REVIEWS SECTION -->
+  <app-reviews [ngClass]="{'hidden': !activeLinkOnMenu[1]}"></app-reviews>
+
+  <!-- DETAILS SECTION -->
+  <div [ngClass]="{'hidden': !activeLinkOnMenu[2]}" class="flex flex-col gap-5">
+    <!-- about us -->
+    <div>
+      <h3 class="font-semibold text-lg">🌐 ¿Quiénes somos? </h3>
+      <p class="text-base text-gray-500 ml-5"> {{ dataToBeSent.aboutUs }} </p>
+    </div>
+
+    <!-- opening hours -->
+    <div>
+      <h3 class="font-semibold text-lg">🕑 Horarios de atención: </h3>
+      <div>
+        @for(day of openingHoursArr; track day){
+          <p class="text-base text-gray-500 ml-5"><span class="font-semibold text-slate-900"> {{ day.split(":")[0] }}: </span> {{ day.split(":")[1] }} </p>
+        }
+      </div>
+    </div>
+
+    <!-- contact us     -->
+    <div>
+      <h3 class="font-semibold text-lg">📱 Contáctenos: </h3>
+      <p class="text-base text-gray-500 ml-5"> {{ dataToBeSent.email }} </p>
+      <p class="text-base text-gray-500 ml-5"> {{ dataToBeSent.phone }} </p>
+    </div>
+  </div>
+
+  <app-whatsappbtn [phoneNumber]="dataToBeSent.phone"/>
+
+</div>
+
+
+<!-- NOT FOUND MODAL -->
+@if(showNotFoundModal){
+    <div class="fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-90 flex items-center justify-center"  (click)="onModalContainerClick()">
+      <form class="bg-white w-full max-w-[300px] p-7 flex flex-col relative rounded-lg overflow-x-hidden" (click)="onFormClick($event)" [ngClass]="{'animate-wiggle': addShakingEffects}">
+
+
+        <!-- title -->
+        <h3 class="text-center text-5xl ">😥</h3>
+        <h3 class="font-bold text-lg py-5 text-center">Este negocio no tiene página de reservas.</h3>
+      </form>
+    </div>
+}
