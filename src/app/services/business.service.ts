@@ -8,7 +8,7 @@ import { BusinessModel } from '../interfaces/businessModel';
 export class BusinessService {
 
   constructor(private httpClient: HttpClient) { }
-  url: string = "http://localhost:3000/businessInfo"
+  url: string = "https://colombiareservabackend.vercel.app/businessInfo"
 
   createBusinessInfo(data: BusinessModel){
     return this.httpClient.post(this.url, data)

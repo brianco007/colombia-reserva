@@ -22,7 +22,7 @@ export class EditBusinessInfoComponent {
   activatedRoute = inject(ActivatedRoute)
   router = inject (Router)
 
-  baseUrl = "http://localhost:3000/businessBanners/"
+  backendURL = "https://colombiareservabackend.vercel.app/businessBanners/"
   businessId: string | null= "";
   activateEditionGeneralInfo: boolean = false;
   activateEditionPicture: boolean = false;

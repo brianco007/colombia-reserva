@@ -8,7 +8,7 @@ import { GalleryModel } from '../interfaces/galleryModel';
 export class GalleryService {
 
   constructor(private httpClient: HttpClient) { }
-  url: string = "http://localhost:3000/gallery/"
+  url: string = "https://colombiareservabackend.vercel.app/gallery/"
 
   createGallery(data: FormData){
     return this.httpClient.post(this.url, data)

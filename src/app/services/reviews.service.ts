@@ -9,7 +9,7 @@ export class ReviewsService {
 
   
   constructor(private httpClient: HttpClient) { }
-  url: string = "http://localhost:3000/reviews"
+  url: string = "https://colombiareservabackend.vercel.app/reviews"
 
   createReview(data: {comment: string, stars: number, businessId: string}){
     return this.httpClient.post(this.url, data)

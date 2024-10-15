@@ -28,7 +28,7 @@ export class BookingComponent {
   eventsService = inject(EventsService)
 
   businessId: string | null= "";
-  backendURL: string = "http://localhost:3000/businessBanners/"
+  backendURL: string = "https://colombiareservabackend.vercel.app/businessBanners/"
 
   // Event creation
   dataToBeSent: BusinessModel = {
@@ -60,7 +60,6 @@ export class BookingComponent {
   selectedDaySlots: {value:string, display: string}[] = []
   errorMsg: string = ""
   allEvents: EventModel[] = []
-  baseUrl = "http://localhost:3000/businessBanners/"
   activeLinkOnMenu: boolean[] = [true, false, false]
   confirmationModal: boolean = false;
 
