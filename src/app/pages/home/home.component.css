@@ -1,0 +1,80 @@
+.container {
+  background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+}
+
+.phone1 {
+  animation: rotatephone1 .5s linear;
+}
+
+.phone2 {
+  animation: rotatephone2 1s;
+}
+
+.phone3 {
+  animation: rotatephone3 1s;
+}
+
+.phone4 {
+  animation: rotatephone4 1s;
+}
+
+.phone5 {
+  animation: rotatephone5 1s;
+}
+
+@keyframes rotatephone1 {
+  0%{
+    opacity: 0;
+    bottom: 25%;
+  }
+  100%{
+    opacity: 100;
+    bottom: -5%;
+
+  }
+}
+
+@keyframes rotatephone2 {
+  0%{
+    rotate: -25deg;
+    opacity: 0
+  }
+  100%{
+    rotate: 0;
+    opacity: 100
+  }
+}
+
+
+@keyframes rotatephone3 {
+  0%{
+    rotate: 25deg;
+    opacity: 0
+  }
+  100%{
+    rotate: 0;
+    opacity: 100
+  }
+}
+
+@keyframes rotatephone4 {
+  0%{
+    rotate: 45deg;
+    opacity: 0
+  }
+  100%{
+    rotate: 0;
+    opacity: 100
+  }
+}
+
+@keyframes rotatephone5 {
+  0%{
+    rotate: -45deg;
+    opacity: 0
+  }
+  100%{
+    rotate: 0;
+    opacity: 100
+  }
+}
