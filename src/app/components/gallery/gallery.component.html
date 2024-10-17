@@ -1,4 +1,6 @@
 <div class="w-full relative newmd:max-w-[800px] mx-auto newmd:mt-10" >
+  <app-loader *ngIf="loading"/>
+
   <img [src]="currentPicture" alt="gallery" class="object-cover h-60 sm:h-80 md:h-96 lg:h-[400px] w-full ">
 
   <!-- dots -->

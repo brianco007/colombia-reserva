@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { GalleryService } from '../../services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryModel } from '../../interfaces/galleryModel';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })
@@ -20,6 +21,9 @@ export class GalleryComponent {
   businessId: string | null = ""
   currentIndex = 0
   currentPicture = this.pictures[this.currentIndex]
+
+  //loader
+  loading: boolean = false
 
 
   handleDotClick(index: number){
@@ -46,6 +50,7 @@ export class GalleryComponent {
 
   getBusinessBanners(){
     if(this.businessId){
+      this.loading = true
       this.galleryService.getAllGalleries().subscribe((res: {pics: string[], businessId: string}[]) => {
         const thisBusinessPics = res.filter(gallery => gallery.businessId === this.businessId)
 
@@ -55,6 +60,7 @@ export class GalleryComponent {
           // Set initial picture
           this.currentIndex = 0;
           this.currentPicture = this.pictures[this.currentIndex];
+          this.loading = false
 
           
         } else {
@@ -63,6 +69,8 @@ export class GalleryComponent {
           // Set initial picture
           this.currentIndex = 0;
           this.currentPicture = this.pictures[this.currentIndex];
+          this.loading = false
+
         }
       })
     }
