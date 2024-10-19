@@ -24,7 +24,7 @@ export class BusinessDashboardComponent {
   businessService = inject(BusinessService)
 
   businessId: string | null= "";
-  backendURL: string = "https://colombiareservatodo.web.app/businessBanners/"
+  backendURL: string = "https://colombiareservabackend.vercel.app/businessBanners/"
 
   activeLinkOnMenu: boolean[] = [true, false, false]
 

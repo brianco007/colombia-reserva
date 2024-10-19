@@ -30,7 +30,7 @@ export class BookingComponent {
   eventsService = inject(EventsService)
 
   businessId: string | null= "";
-  backendURL: string = "https://colombiareservatodo.web.app/businessBanners/"
+  backendURL: string = "https://colombiareservabackend.vercel.app/businessBanners/"
 
   // Event creation
   dataToBeSent: BusinessModel = {

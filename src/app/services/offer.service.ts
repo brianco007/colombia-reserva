@@ -7,7 +7,7 @@ import { OfferModel } from '../interfaces/offerModel';
 })
 export class OfferService {
   httpClient = inject(HttpClient)
-  url: string = "https://colombiareservatodo.web.app/offer"
+  url: string = "https://colombiareservabackend.vercel.app/offer"
 
   createOffer(data: OfferInterface){
     return this.httpClient.post(this.url, data)
