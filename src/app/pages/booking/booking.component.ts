@@ -14,11 +14,13 @@ import openingHours from '../../utils/openingHours';
 import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { GalleryComponent } from '../../components/gallery/gallery.component';
 import { WhatsappbtnComponent } from '../../components/whatsappbtn/whatsappbtn.component';
+import { OfferclientsComponent } from '../../components/offerclients/offerclients.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReviewsComponent, GalleryComponent, WhatsappbtnComponent],
+  imports: [FormsModule, CommonModule, ReviewsComponent, GalleryComponent, WhatsappbtnComponent, OfferclientsComponent, FooterComponent],
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.css'
 })
@@ -28,7 +30,7 @@ export class BookingComponent {
   eventsService = inject(EventsService)
 
   businessId: string | null= "";
-  backendURL: string = "https://colombiareservabackend.vercel.app/businessBanners/"
+  backendURL: string = "https://colombiareservatodo.web.app/businessBanners/"
 
   // Event creation
   dataToBeSent: BusinessModel = {

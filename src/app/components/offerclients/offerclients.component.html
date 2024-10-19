@@ -1,0 +1,9 @@
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2 lg-gap-3 text-slate-900 pl-5 justify-center items-center">
+  @for(offer of allOffers; track offer.businessId){
+    <div class="bg-white shadow-md px-4 py-2 rounded-lg relative hover:scale-105 duration-200">
+      <h3 class="font-semibold text-sm italic text-cyan-600"> {{ offer.service }} </h3>
+      <h3 class="text-slate-700 text-sm leading-4"> {{ offer.description }} </h3>
+      <h4 class="text-xs text-right font-semibold"> {{ offer.price | currency }} </h4>
+    </div>
+  }
+</div>

@@ -8,7 +8,7 @@ import { EventModel } from '../interfaces/eventModel';
 export class EventsService {
 
   constructor(private httpClient: HttpClient) { }
-  url: string = "https://colombiareservabackend.vercel.app/events"
+  url: string = "https://colombiareservatodo.web.app/events"
 
   createEvent(data: EventModel){
     return this.httpClient.post(this.url, data)

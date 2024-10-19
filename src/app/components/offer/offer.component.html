@@ -1,0 +1,38 @@
+<h3 class="text-lg font-bold text-center my-5">Nuestros Servicios</h3>
+
+@if(!showInputs){
+  <div class="bg-white shadow-lg p-4 w-[200px] rounded-lg cursor-pointer hover:scale-105 duration-200 mx-auto" (click)="showInputs = true">
+    <h3>Agregar un servicio ➕</h3>
+  </div>
+}
+
+@if(showInputs){
+  <form class="flex flex-col gap-3" (submit)="handleSubmit()">
+    <input type="text" placeholder="Nombre del servicio" class="p-2" [(ngModel)]="dataTobeSent.service" name="service">
+    <input type="text" placeholder="Descripción" class="p-2" [(ngModel)]="dataTobeSent.description" name="description">
+    <input type="number" placeholder="Precio" class="p-2" [(ngModel)]="dataTobeSent.price" name="price">
+    <h5 class="text-red-500 text-sm font-semibold"> {{ errorMsg ? errorMsg : "" }} </h5>
+    <div class="mt-2 flex justify-center gap-2">
+      <button class="border-2 border-slate-900 py-2 px-4 rounded " type="button" (click)="cancel()">Cancelar</button>
+      <button class="bg-slate-900 hover:bg-slate-700 duration-200 text-white py-2 px-4 rounded" >{{userIsEditing ? "Actualizar" : "Agregar"}}</button>
+    </div>
+  </form>
+}
+
+@if(!showInputs){
+  <div class="grid grid-cols-2 gap-3 mt-5 text-slate-900">
+    @for(offer of allOffers; track offer.businessId){
+      <div class="bg-white shadow-lg px-4 py-2 pt-7 rounded-lg relative">
+        <h3 class="font-semibold md:text-lg italic text-cyan-600 "> {{ offer.service }} </h3>
+        <h3 class="text-slate-700 md:text-base leading-4"> {{ offer.description }} </h3>
+        <h4 class="text-sm text-right font-semibold"> {{ offer.price | currency }} </h4>
+  
+        <div class="absolute right-1 top-2 flex gap-3">
+          <img src="assets/delete.svg" alt="delete icon" title="Borrar" (click)="deleteOne(offer._id)" class="size-[15px] md:size-[20px] cursor-pointer" />
+          <img src="assets/edit.svg" alt="delete icon" title="Borrar" (click)="activateEdition(offer._id)" class="size-[15px] md:size-[20px] cursor-pointer"/>
+        </div>
+      </div>
+    }
+  </div>
+}
+

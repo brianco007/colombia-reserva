@@ -6,11 +6,12 @@ import { BusinessModel } from '../../interfaces/businessModel';
 import { CommonModule } from '@angular/common';
 import { generalInfoFormValidation } from '../../utils/generalInfoFormValidation';
 import { EditscheduleComponent } from '../editschedule/editschedule.component';
+import { OfferComponent } from '../offer/offer.component';
 
 @Component({
   selector: 'app-edit-business-info',
   standalone: true,
-  imports: [FormsModule, CommonModule, EditscheduleComponent],
+  imports: [FormsModule, CommonModule, EditscheduleComponent, OfferComponent],
   templateUrl: './edit-business-info.component.html',
   styleUrl: './edit-business-info.component.css'
 })
@@ -22,7 +23,7 @@ export class EditBusinessInfoComponent {
   activatedRoute = inject(ActivatedRoute)
   router = inject (Router)
 
-  backendURL = "https://colombiareservabackend.vercel.app/businessBanners/"
+  backendURL = "https://colombiareservatodo.web.app/businessBanners/"
   businessId: string | null= "";
   activateEditionGeneralInfo: boolean = false;
   activateEditionPicture: boolean = false;

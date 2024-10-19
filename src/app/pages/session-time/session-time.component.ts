@@ -65,6 +65,7 @@ export class SessionTimeComponent {
       formData.append('banner', this.dataToBeSent.banner);
     }
 
+    console.log(this.dataToBeSent.banner)
     
     if (this.businessId) {
       this.businessService.updateBusinessInfo(this.businessId, formData).subscribe((res: any) => {

@@ -7,12 +7,13 @@ import { FullcalendarComponent } from '../fullcalendar/fullcalendar.component';
 import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { EditBusinessInfoComponent } from '../../components/edit-business-info/edit-business-info.component';
 import { GalleryComponent } from '../../components/gallery/gallery.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 
 @Component({
   selector: 'app-business-dashboard',
   standalone: true,
-  imports: [CommonModule, FullcalendarComponent, ReviewsComponent, EditBusinessInfoComponent, GalleryComponent, RouterLink],
+  imports: [CommonModule, FullcalendarComponent, ReviewsComponent, EditBusinessInfoComponent, GalleryComponent, RouterLink, FooterComponent],
   templateUrl: './business-dashboard.component.html',
   styleUrl: './business-dashboard.component.css'
 })
@@ -23,7 +24,7 @@ export class BusinessDashboardComponent {
   businessService = inject(BusinessService)
 
   businessId: string | null= "";
-  backendURL: string = "https://colombiareservabackend.vercel.app/businessBanners/"
+  backendURL: string = "https://colombiareservatodo.web.app/businessBanners/"
 
   activeLinkOnMenu: boolean[] = [true, false, false]
 
