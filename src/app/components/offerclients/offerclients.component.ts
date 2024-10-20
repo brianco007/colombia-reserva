@@ -29,7 +29,7 @@ export class OfferclientsComponent {
   getThisBusinessOffers(){
     if(this.businessId){
       this.offerService.getAllOffers().subscribe((res: OfferModel[]) => {
-        this.allOffers = res.filter(offer => offer.businessId = this.businessId)
+        this.allOffers = res.filter(offer => offer.businessId === this.businessId)
       })
     }
   }
